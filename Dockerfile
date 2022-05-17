@@ -21,5 +21,11 @@ FROM alpine
 WORKDIR /rttys
 RUN apk update && \
     apk add --no-cache linux-pam-dev
+
+COPY ./docker-entrypoint.sh /
 COPY  --from=1 /build/rttys/rttys /rttys/rttys
-ENTRYPOINT ["/rttys/rttys"]
+
+EXPOSE 5912 5913 5914
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["/rttys/rttys"]
