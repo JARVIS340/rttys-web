@@ -12,7 +12,7 @@ RUN tar -xvf v4.0.1.tar.gz -C /build/rttys && \
 COPY --from=0 /build/webs/dist /build/rttys/ui/dist
 RUN apk update && \
     apk add git gcc linux-pam-dev libc-dev && \
-    go get -v github.com/rakyll/statik && \
+    go install -v github.com/rakyll/statik@latest && \
     statik -src=/build/rttys/ui/dist && \
     go build -ldflags "-w -s"
 
